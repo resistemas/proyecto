@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">proyecto</string>
+
+    <!--    Text Intro-->
+    <string name="slogan">Encuentra y Disfruta\n de toda nuestra\n riqueza artesanal</string>
+    <string name="btnIntro">Empezar</string>
+
+    <!--    Texto Login-->
+    <string name="txtLogin">INICIAR SESIÓN</string>
+    <string name="txtUsuario">Usuario</string>
+    <string name="txtContrasena">Contraseña</string>
+    <string name="btnLogin">INGRESAR</string>
+    <string name="txtOlvide">¿Olvide mi contraseña, </string>
+    <string name="txtOlvide2">Recuperar?</string>
+
+    <!--    Texto Dashboard-->
+    <string name="txtBuscar">Que es lo que buscas?</string>
+    <string name="txtBuscarHitn">Buscar...</string>
+    <string name="txtVendidas">Las más vendidas</string>
+    <string name="txtRelacionados">Artesanias Relacionados</string>
+
+<!--    Texto Detalle Artesania-->
+    <string name="txtDescripcion">Descripción</string>
+    <string name="txtArtesano">Artesano</string>
+</resources>
