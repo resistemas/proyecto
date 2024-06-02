@@ -21,8 +21,6 @@ import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        startActivity(Intent(this, DashboardActivity::class.java))
+        startActivity(Intent(this, IntroActivity::class.java))
 
     }
 
