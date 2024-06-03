@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        startActivity(Intent(this, IntroActivity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
 
     }
 

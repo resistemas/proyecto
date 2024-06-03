@@ -1,7 +1,4 @@
-package com.example.proyecto.Activity
-
-import com.example.proyecto.R
-
+package com.example.proyecto
 
 
 
@@ -13,21 +10,19 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.proyecto.Activity.RegistrationUtil
+import com.example.proyecto.R
+
 class LoginActivity : AppCompatActivity() {
     private lateinit var txtUsuario: EditText
     private lateinit var txtPassword: EditText
-    private lateinit var txtConfirmPassword: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
-
         txtUsuario = findViewById(R.id.txtUsuario)
         txtPassword = findViewById(R.id.txtPassword)
-        txtConfirmPassword = findViewById(R.id.txtPassword)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.loadingMasVendidos)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -46,22 +41,39 @@ class LoginActivity : AppCompatActivity() {
     private fun validateInputs(): Boolean {
         val usuario = txtUsuario.text.toString()
         val password = txtPassword.text.toString()
-        val confirmPassword = txtConfirmPassword.text.toString()
 
-        if (!RegistrationUtil.validateRegistrationInput(usuario, password, confirmPassword)) {
-            if (usuario.isEmpty()) {
-                txtUsuario.error = "El campo de usuario no puede estar vacío"
-            } else if (usuario in RegistrationUtil.existingUsers) {
-                txtUsuario.error = "El nombre de usuario ya está tomado"
-            } else if (password.isEmpty()) {
-                txtPassword.error = "El campo de contraseña no puede estar vacío"
-            } else if (password != confirmPassword) {
-                txtConfirmPassword.error = "La contraseña y la confirmación no coinciden"
-            } else if (password.count { it.isDigit() } < 2) {
-                txtPassword.error = "La contraseña debe contener al menos 2 números"
-            }
+        if (usuario.isEmpty()) {
+            txtUsuario.error = "El campo de usuario no puede estar vacío"
             return false
         }
+
+        if (!isValidUser(usuario)) {
+            txtUsuario.error = "El usuario debe contener al menos 8 caracteres y caracteres especiales"
+            return false
+        }
+
+        if (password.isEmpty()) {
+            txtPassword.error = "El campo de contraseña no puede estar vacío"
+            return false
+        }
+
+        if (!isValidPassword(password)) {
+            txtPassword.error = "La contraseña debe contener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres especiales"
+            return false
+        }
+
         return true
+    }
+
+    private fun isValidUser(user: String): Boolean {
+        return user.length >= 8 && user.any { it.isDigit() } && user.any { !it.isLetterOrDigit() }
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        return password.length >= 8 &&
+                password.any { it.isUpperCase() } &&
+                password.any { it.isLowerCase() } &&
+                password.any { it.isDigit() } &&
+                password.any { !it.isLetterOrDigit() }
     }
 }
