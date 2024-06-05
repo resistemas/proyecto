@@ -22,5 +22,6 @@ class IntroActivity : AppCompatActivity() {
         }
         btnIntro = findViewById(R.id.btnIntro)
         btnIntro.setOnClickListener{ startActivity(Intent(this, DashboardActivity::class.java)) }
+
     }
 }

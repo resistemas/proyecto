@@ -2,7 +2,7 @@ package com.example.proyecto.Model
 
 import com.google.gson.annotations.SerializedName
 
-data class Productos(
+data class MasVendidos(
     @SerializedName("id")
     var id : Int,
 

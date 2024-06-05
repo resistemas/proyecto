@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.proyecto.Adapter.MasVendidosAdapter
+import com.example.proyecto.Adapter.RelacionadosAdpater
 import com.example.proyecto.R
 import com.example.proyecto.ViewModel.ProductosViewModel
 import com.example.proyecto.databinding.ActivityDashboardBinding
@@ -23,6 +24,11 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var adapterMasVendidos : MasVendidosAdapter
     private lateinit var rvMasVendido : RecyclerView
     private lateinit var pgMasVendidos : ProgressBar
+
+    private lateinit var adapterRelacionados : RelacionadosAdpater
+    private lateinit var rvRelacionados : RecyclerView
+    private lateinit var pgRelacionados : ProgressBar
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +42,12 @@ class DashboardActivity : AppCompatActivity() {
         }
         rvMasVendido = findViewById(R.id.reciclerMasVendidos)
         pgMasVendidos = findViewById(R.id.loadingMasVendidos)
+        pgMasVendidos.visibility = View.VISIBLE
+
+        rvRelacionados = findViewById(R.id.reciclerRelacionados)
+        pgRelacionados = findViewById(R.id.loadingRelacionados)
+        pgRelacionados.visibility = View.VISIBLE
+
         initView()
     }
 
@@ -43,25 +55,37 @@ class DashboardActivity : AppCompatActivity() {
     private fun initView() {
         //viewModel
         viewModel = ViewModelProvider(this)[ProductosViewModel::class.java]
+
         setupRecyclerView()
 
         viewModel.masVendidosRequest()
+        viewModel.relacionadosRequest()
 
 
-        viewModel.productosLista.observe(this){
+        viewModel.masVendidosLista.observe(this){
             adapterMasVendidos.masVendidosLista = it
             adapterMasVendidos.notifyDataSetChanged()
+            pgMasVendidos.visibility = View.GONE
         }
 
-        pgMasVendidos.visibility = View.GONE
+        viewModel.relacionadosLista.observe(this){
+            adapterRelacionados.relacionadosLista = it
+            adapterRelacionados.notifyDataSetChanged()
+            pgRelacionados.visibility = View.GONE
+        }
+
 
     }
 
     private fun setupRecyclerView(){
-        pgMasVendidos.visibility = View.VISIBLE
+
         rvMasVendido.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         adapterMasVendidos = MasVendidosAdapter(this, arrayListOf())
         rvMasVendido.adapter  = adapterMasVendidos
+
+        rvRelacionados.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        adapterRelacionados = RelacionadosAdpater(this, arrayListOf())
+        rvRelacionados.adapter  = adapterRelacionados
 
     }
 }

@@ -6,17 +6,21 @@
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     android:layout_marginTop="4dp"
-    android:background="@color/main_background">
+    android:id="@+id/clDetalleMasVendido">
 
     <ImageView
         android:id="@+id/imgDetalleImagen"
         android:layout_width="120dp"
-        android:layout_height="180dp"
+        android:layout_height="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:src="@drawable/img_rouended"
+        android:scaleType="centerCrop"
+        android:clipToOutline="true"
+        />
 
     <TextView
         android:id="@+id/txtTituloDetalleImagen"
@@ -29,8 +33,10 @@
         android:maxLines="2"
         android:text="Titulo"
         android:textAlignment="center"
+        android:textAllCaps="true"
         android:textColor="@color/primary"
         android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imgDetalleImagen"
         app:layout_constraintStart_toStartOf="@+id/imgDetalleImagen"
         app:layout_constraintTop_toBottomOf="@+id/imgDetalleImagen" />
