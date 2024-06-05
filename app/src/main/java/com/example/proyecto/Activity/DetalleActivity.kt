@@ -2,20 +2,25 @@ package com.example.proyecto.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.proyecto.Adapter.RelacionadosAdpater
 import com.example.proyecto.R
 import com.example.proyecto.ViewModel.ProductosViewModel
 import com.google.android.material.imageview.ShapeableImageView
@@ -25,6 +30,7 @@ class DetalleActivity : AppCompatActivity() {
 
     private lateinit var pgDetalle : ProgressBar
 
+    private lateinit var svContainer : ScrollView
     private  lateinit var ivPosterGrande : ImageView
     private lateinit var ivPosterNormal : ShapeableImageView
 
@@ -36,6 +42,7 @@ class DetalleActivity : AppCompatActivity() {
     private lateinit var tvArtesanoDetalle : TextView
 
     private lateinit var cvRelacionadoDetalle : RecyclerView
+    private lateinit var adapterRelacionados : RelacionadosAdpater
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +55,7 @@ class DetalleActivity : AppCompatActivity() {
         }
 
         initItems()
+        setupRc()
         initRequest()
         btnActions()
     }
@@ -62,8 +70,10 @@ class DetalleActivity : AppCompatActivity() {
         tvParrafoDetalle = findViewById(R.id.txtDetalleParrafo)
         tvArtesanoDetalle = findViewById(R.id.txtDetalleArtesano)
         cvRelacionadoDetalle = findViewById(R.id.reciclerRelacionadoDetalle)
+        svContainer = findViewById(R.id.scrollView3)
 
         pgDetalle.visibility = View.VISIBLE
+        svContainer.visibility = View.GONE
 
     }
 
@@ -72,8 +82,10 @@ class DetalleActivity : AppCompatActivity() {
 
         val parametros = intent.extras
         val id = parametros?.getInt("id")
+        val categoria = parametros?.getInt("categoria")
 
         viewModel.ProductoDetalle(id.toString())
+        viewModel.ProductoDetalleRelacionado(categoria.toString())
 
         viewModel.productosLista.observe(this){
             tvTituloDetalle.text = it.first().producto
@@ -89,8 +101,22 @@ class DetalleActivity : AppCompatActivity() {
                 .transforms(RoundedCorners(15))
                 .into(ivPosterNormal)
 
+            svContainer.visibility = View.VISIBLE
             pgDetalle.visibility = View.GONE
+
+
         }
+
+        viewModel.relacionadosLista.observe(this){
+            adapterRelacionados.relacionadosLista = it
+            adapterRelacionados.notifyDataSetChanged()
+        }
+    }
+
+    private fun setupRc(){
+        cvRelacionadoDetalle.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        adapterRelacionados = RelacionadosAdpater(this, arrayListOf())
+        cvRelacionadoDetalle.adapter  = adapterRelacionados
     }
 
     private fun btnActions(){

@@ -1,7 +1,10 @@
 package com.example.proyecto.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +32,10 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var rvRelacionados : RecyclerView
     private lateinit var pgRelacionados : ProgressBar
 
-
+    private lateinit var btnDashboard : ImageView
+    private lateinit var btnFavorito : ImageView
+    private lateinit var btnShop : ImageView
+    private lateinit var btnLogin : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +46,12 @@ class DashboardActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        btnDashboard = findViewById(R.id.btnDashboard)
+        btnFavorito = findViewById(R.id.btnFavorito)
+        btnShop = findViewById(R.id.btnShop)
+        btnLogin = findViewById(R.id.btnLogin)
+
         rvMasVendido = findViewById(R.id.reciclerMasVendidos)
         pgMasVendidos = findViewById(R.id.loadingMasVendidos)
         pgMasVendidos.visibility = View.VISIBLE
@@ -87,5 +99,23 @@ class DashboardActivity : AppCompatActivity() {
         adapterRelacionados = RelacionadosAdpater(this, arrayListOf())
         rvRelacionados.adapter  = adapterRelacionados
 
+    }
+
+    private fun btnActions(){
+        btnDashboard.setOnClickListener {
+            startActivity(Intent(this, DashboardActivity::class.java))
+        }
+
+        btnFavorito.setOnClickListener {
+//            startActivity(Intent(this, ))
+        }
+
+        btnShop.setOnClickListener {
+
+        }
+
+        btnLogin.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
     }
 }

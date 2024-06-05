@@ -18,4 +18,7 @@ interface WebService {
     @GET("producto/{id}/detalle")
     suspend fun productoDetalle( @Path(value = "id", encoded = true) string: String ): Response<ProductosResponse>
 
+    @GET("producto/{categoria}/relacionado")
+    suspend fun productoDetalleRelacionado( @Path(value = "categoria", encoded = true) string: String ): Response<RelacionadosResponse>
+
 }

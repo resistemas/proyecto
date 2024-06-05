@@ -53,4 +53,13 @@ class ProductosViewModel : ViewModel() {
             }
         }
     }
+
+    fun ProductoDetalleRelacionado(categoria : String){
+        viewModelScope.launch(Dispatchers.IO){
+            val response = RetrofitCliente.webService.productoDetalleRelacionado(categoria)
+            withContext(Dispatchers.Main){
+                relacionadoLista.value = response.body()!!.data
+            }
+        }
+    }
 }

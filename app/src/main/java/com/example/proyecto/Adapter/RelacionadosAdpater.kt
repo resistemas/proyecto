@@ -42,11 +42,12 @@ class RelacionadosAdpater(var context: Context, var relacionadosLista : List<Rel
         holder.cvImagen.setBackgroundResource(R.drawable.img_rouended)
 
         holder.tvTitulo.text = masVendido.producto
-        holder.tvScore.text = masVendido.codigo
+        holder.tvScore.text = "S/. ${masVendido.precio}"
 
         holder.clMasVendido.setOnClickListener {
             val intent = Intent(context, DetalleActivity::class.java)
             intent.putExtra("id", masVendido.id)
+            intent.putExtra("categoria", masVendido.categoria_id)
             holder.itemView.context.startActivity(intent)
 //            showOverview(masVendido.descripcion, masVendido.producto)
         }
