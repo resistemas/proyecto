@@ -15,16 +15,12 @@ object RegistrationUtil {
      */
     fun validateRegistrationInput(
         username: String,
-        password: String,
-        confirmedPassword: String
+        password: String
     ): Boolean {
         if (username.isEmpty() || password.isEmpty()) {
             return false
         }
         if (username in existingUsers) {
-            return false
-        }
-        if (password != confirmedPassword) {
             return false
         }
         if (password.count { it.isDigit() } < 2) {

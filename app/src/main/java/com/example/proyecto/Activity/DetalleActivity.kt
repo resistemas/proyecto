@@ -2,17 +2,14 @@ package com.example.proyecto.Activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -20,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.proyecto.Adapter.RelacionadosAdpater
+import com.example.proyecto.Adapter.NuevosAdpater
 import com.example.proyecto.R
 import com.example.proyecto.ViewModel.ProductosViewModel
 import com.google.android.material.imageview.ShapeableImageView
@@ -42,7 +39,7 @@ class DetalleActivity : AppCompatActivity() {
     private lateinit var tvArtesanoDetalle : TextView
 
     private lateinit var cvRelacionadoDetalle : RecyclerView
-    private lateinit var adapterRelacionados : RelacionadosAdpater
+    private lateinit var adapterRelacionados : NuevosAdpater
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,15 +104,21 @@ class DetalleActivity : AppCompatActivity() {
 
         }
 
-        viewModel.relacionadosLista.observe(this){
-            adapterRelacionados.relacionadosLista = it
+        viewModel.nuevosLista.observe(this){
+            adapterRelacionados.nuevosLista = it
             adapterRelacionados.notifyDataSetChanged()
+        }
+
+        viewModel.toastMessage.observe(this){
+            it?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     private fun setupRc(){
         cvRelacionadoDetalle.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        adapterRelacionados = RelacionadosAdpater(this, arrayListOf())
+        adapterRelacionados = NuevosAdpater(this, arrayListOf())
         cvRelacionadoDetalle.adapter  = adapterRelacionados
     }
 

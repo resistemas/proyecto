@@ -12,14 +12,16 @@
     <string name="btnLogin">INGRESAR</string>
     <string name="txtOlvide">¿Olvide mi contraseña, </string>
     <string name="txtOlvide2">Recuperar?</string>
+    <string name="txtIngresarRedes">Tambien puede ingresar:</string>
+    <string name="txtRegistrarseLogin">Sin una cuenta Registrate, <b>AQUI</b>.</string>
 
     <!--    Texto Dashboard-->
     <string name="txtBuscar">Que es lo que buscas?</string>
     <string name="txtBuscarHitn">Buscar...</string>
     <string name="txtVendidas">Las más vendidas</string>
-    <string name="txtRelacionados">Artesanias Relacionados</string>
+    <string name="txtRelacionados">Nuevas Artesanias</string>
 
-<!--    Texto Detalle Artesania-->
+    <!--    Texto Detalle Artesania-->
     <string name="txtDescripcion">Descripción</string>
     <string name="txtArtesano">Artesano</string>
 </resources>

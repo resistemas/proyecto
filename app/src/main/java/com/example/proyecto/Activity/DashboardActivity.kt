@@ -3,23 +3,20 @@ package com.example.proyecto.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.proyecto.Adapter.MasVendidosAdapter
-import com.example.proyecto.Adapter.RelacionadosAdpater
+import com.example.proyecto.Adapter.NuevosAdpater
 import com.example.proyecto.R
 import com.example.proyecto.ViewModel.ProductosViewModel
-import com.example.proyecto.databinding.ActivityDashboardBinding
 
 
 class DashboardActivity : AppCompatActivity() {
@@ -28,7 +25,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var rvMasVendido : RecyclerView
     private lateinit var pgMasVendidos : ProgressBar
 
-    private lateinit var adapterRelacionados : RelacionadosAdpater
+    private lateinit var adapterRelacionados : NuevosAdpater
     private lateinit var rvRelacionados : RecyclerView
     private lateinit var pgRelacionados : ProgressBar
 
@@ -61,6 +58,7 @@ class DashboardActivity : AppCompatActivity() {
         pgRelacionados.visibility = View.VISIBLE
 
         initView()
+        btnActions()
     }
 
 
@@ -71,7 +69,7 @@ class DashboardActivity : AppCompatActivity() {
         setupRecyclerView()
 
         viewModel.masVendidosRequest()
-        viewModel.relacionadosRequest()
+        viewModel.nuevosRequest()
 
 
         viewModel.masVendidosLista.observe(this){
@@ -80,10 +78,16 @@ class DashboardActivity : AppCompatActivity() {
             pgMasVendidos.visibility = View.GONE
         }
 
-        viewModel.relacionadosLista.observe(this){
-            adapterRelacionados.relacionadosLista = it
+        viewModel.nuevosLista.observe(this){
+            adapterRelacionados.nuevosLista = it
             adapterRelacionados.notifyDataSetChanged()
             pgRelacionados.visibility = View.GONE
+        }
+
+        viewModel.toastMessage.observe(this){
+            it?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
         }
 
 
@@ -96,7 +100,7 @@ class DashboardActivity : AppCompatActivity() {
         rvMasVendido.adapter  = adapterMasVendidos
 
         rvRelacionados.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        adapterRelacionados = RelacionadosAdpater(this, arrayListOf())
+        adapterRelacionados = NuevosAdpater(this, arrayListOf())
         rvRelacionados.adapter  = adapterRelacionados
 
     }

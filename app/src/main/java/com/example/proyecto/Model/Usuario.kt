@@ -2,7 +2,8 @@ package com.example.proyecto.Model
 
 import com.google.gson.annotations.SerializedName
 
-data class Vendedor(
+data class Usuario(
+
     @SerializedName("id")
     var id : Int? = null,
 
@@ -25,5 +26,9 @@ data class Vendedor(
     var usuario : String? = null,
 
     @SerializedName("estado")
-    var estado : String? = null
+    var estado : String? = null,
+
+    @SerializedName("roles")
+    var roles : Rol
+
 )

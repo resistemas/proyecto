@@ -1,6 +1,7 @@
 package com.example.proyecto.Network
 
 import com.example.proyecto.Core.Variables
+import com.example.proyecto.Model.Header.HeaderInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.Call
@@ -16,6 +17,11 @@ object RetrofitCliente {
     val webService : WebService by lazy {
         Retrofit.Builder().baseUrl(Variables.API_URL)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+            .client(getCliente())
             .build().create(WebService::class.java)
+    }
+
+    private fun getCliente() : OkHttpClient{
+        return OkHttpClient.Builder().addInterceptor(HeaderInterceptor()).build()
     }
 }

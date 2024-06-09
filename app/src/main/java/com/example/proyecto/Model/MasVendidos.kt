@@ -4,35 +4,20 @@ import com.google.gson.annotations.SerializedName
 
 data class MasVendidos(
     @SerializedName("id")
-    var id : Int,
+    var id : Int? = null,
 
-    @SerializedName("usuario_id")
-    var usuario_id : Int,
+    @SerializedName("venta_id")
+    var ventaId : Int? = null,
 
-    @SerializedName("categoria_id")
-    var categoria_id : Int,
+    @SerializedName("producto_id")
+    var productoId : Int? = null,
 
-    @SerializedName("codigo")
-    var codigo : String,
+    @SerializedName("cantidad")
+    var cantidad : Int? = null,
+
+    @SerializedName("total")
+    var total : String? = null,
 
     @SerializedName("producto")
-    var producto : String,
-
-    @SerializedName("descripcion")
-    var descripcion : String,
-
-    @SerializedName("photo_video")
-    var photo_video : String,
-
-    @SerializedName("precio")
-    var precio : String,
-
-    @SerializedName("estado")
-    var estado : String,
-
-    @SerializedName("vendedor")
-    var vendedor : Vendedor,
-
-    @SerializedName("categoria")
-    var categoria : Categoria,
+    var producto : Productos
 )

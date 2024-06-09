@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.proyecto.Activity.DetalleActivity
-import com.example.proyecto.Model.Relacionados
+import com.example.proyecto.Model.Productos
 import com.example.proyecto.R
 
-class DetalleRelacionadoAdapter(var context: Context, var relacionadosLista : List<Relacionados> ) : RecyclerView.Adapter<DetalleRelacionadoAdapter.ViewHolder>() {
+class DetalleRelacionadoAdapter(var context: Context, var relacionadosLista : List<Productos> ) : RecyclerView.Adapter<DetalleRelacionadoAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val clMasVendido = itemView.findViewById(R.id.clDetalleMasVendido) as ConstraintLayout
         val cvImagen = itemView.findViewById(R.id.imgDetalleImagen) as ImageView

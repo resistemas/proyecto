@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.proyecto.Activity.DetalleActivity
-import com.example.proyecto.Model.Relacionados
+import com.example.proyecto.Model.Productos
 import com.example.proyecto.R
 
-class RelacionadosAdpater(var context: Context, var relacionadosLista : List<Relacionados> ) : RecyclerView.Adapter<RelacionadosAdpater.ViewHolder>() {
+class NuevosAdpater(var context: Context, var nuevosLista : List<Productos> ) : RecyclerView.Adapter<NuevosAdpater.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val clMasVendido = itemView.findViewById(R.id.clDetalleMasVendido) as ConstraintLayout
         val cvImagen = itemView.findViewById(R.id.imgDetalleImagen) as ImageView
@@ -26,13 +26,13 @@ class RelacionadosAdpater(var context: Context, var relacionadosLista : List<Rel
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.imagen_detalle, parent, false)
-        return RelacionadosAdpater.ViewHolder(view)
+        return NuevosAdpater.ViewHolder(view)
     }
 
-    override fun getItemCount():  Int = relacionadosLista.size
+    override fun getItemCount():  Int = nuevosLista.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val masVendido = relacionadosLista[position]
+        val masVendido = nuevosLista[position]
 
         Glide.with(context).load(masVendido.photo_video)
             .override(120, 180)

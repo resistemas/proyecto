@@ -1,8 +1,8 @@
 package com.example.proyecto.Adapter
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +15,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.proyecto.Activity.DetalleActivity
 import com.example.proyecto.Model.MasVendidos
+import com.example.proyecto.Model.Productos
 import com.example.proyecto.R
 
 class MasVendidosAdapter(
     val context : Context,
-    var masVendidosLista : List<MasVendidos>
+    var masVendidosLista : List<Productos>
 ) : RecyclerView.Adapter<MasVendidosAdapter.ViewHolder>() {
     class ViewHolder(itemView: View)  : RecyclerView.ViewHolder(itemView) {
         val clMasVendido = itemView.findViewById(R.id.clDetalleMasVendido) as ConstraintLayout
