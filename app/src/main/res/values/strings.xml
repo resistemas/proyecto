@@ -7,7 +7,7 @@
 
     <!--    Texto Login-->
     <string name="txtLogin">INICIAR SESIÓN</string>
-    <string name="txtUsuario">Usuario</string>
+    <string name="txtUsuario">Correo Electronico</string>
     <string name="txtContrasena">Contraseña</string>
     <string name="btnLogin">INGRESAR</string>
     <string name="txtOlvide">¿Olvide mi contraseña, </string>

@@ -2,10 +2,10 @@ package com.example.proyecto.Activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -18,9 +18,11 @@ class IntroActivity : AppCompatActivity() {
     private lateinit var viewModel: LoginViewModel
     private lateinit var btnIntro : AppCompatButton
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splash = installSplashScreen()
         super.onCreate(savedInstanceState)
         Preferencias = Ayudante(this)
         if(Preferencias.introView("Logueado")){
+            splash.setKeepOnScreenCondition{true}
             val LoginInt = Intent(this, DashboardActivity::class.java)
             LoginInt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(LoginInt)
@@ -34,7 +36,6 @@ class IntroActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
 
         btnIntro = findViewById(R.id.btnIntro)
         btnIntro.setOnClickListener{ startActivity(Intent(this, DashboardActivity::class.java)) }

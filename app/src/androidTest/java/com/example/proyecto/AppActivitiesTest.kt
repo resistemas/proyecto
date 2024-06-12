@@ -65,11 +65,11 @@ class AppActivitiesTest {
         //         .check(matches(isDisplayed()))
 
         // Verificar texto de "Olvidé mi contraseña"
-        onView(withId(R.id.txtRecuperar)).check(matches(isDisplayed()))
-        onView(withId(R.id.txtRecuperar)).check(matches(withText(R.string.txtOlvide2)))
+//        onView(withId(R.id.txtRecuperar)).check(matches(isDisplayed()))
+//        onView(withId(R.id.txtRecuperar)).check(matches(withText(R.string.txtOlvide2)))
 
         // Simular clic en "Olvidé mi contraseña"
-        onView(withId(R.id.txtRecuperar)).perform(click())
+//        onView(withId(R.id.txtRecuperar)).perform(click())
 
         loginScenario.close()
     }

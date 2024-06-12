@@ -11,7 +11,6 @@ class RegistrationUtilTest {
         val result = RegistrationUtil.validateRegistrationInput(
             username = "",
             password = "123",
-            confirmedPassword = "123"
         )
         assertFalse(result)
     }
@@ -21,7 +20,6 @@ class RegistrationUtilTest {
         val result = RegistrationUtil.validateRegistrationInput(
             username = "kira",
             password = "123Moda",
-            confirmedPassword = "123Moda"
         )
         assertTrue(result)
     }
@@ -31,7 +29,6 @@ class RegistrationUtilTest {
         val result = RegistrationUtil.validateRegistrationInput(
             username = "Leo",
             password = "1900",
-            confirmedPassword = "1900"
         )
         assertFalse(result) // Esto debe ser falso, ya que el usuario existe
     }
@@ -41,7 +38,6 @@ class RegistrationUtilTest {
         val result = RegistrationUtil.validateRegistrationInput(
             username = "Lucas",
             password = "abcdf5",
-            confirmedPassword = "abcdf5"
         )
         assertFalse(result)
     }
@@ -51,7 +47,6 @@ class RegistrationUtilTest {
         val result = RegistrationUtil.validateRegistrationInput(
             username = "Lucas",
             password = "",
-            confirmedPassword = ""
         )
         assertFalse(result)
     }
@@ -61,7 +56,6 @@ class RegistrationUtilTest {
         val result = RegistrationUtil.validateRegistrationInput(
             username = "Ana",
             password = "123g23",
-            confirmedPassword = "dfghtr"
         )
         assertFalse(result)
     }

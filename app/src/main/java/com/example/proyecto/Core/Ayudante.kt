@@ -1,8 +1,14 @@
 package com.example.proyecto.Core
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
+import androidx.core.splashscreen.SplashScreen
+import com.example.proyecto.Activity.LoginActivity
 import com.example.proyecto.Model.Usuario
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -24,6 +30,16 @@ class Ayudante(private val context: Context)  {
         editor.apply()
     }
 
+    fun setPrefUsuarioToken(token : String){
+        val editor = PrefreciasGlobal.edit()
+        editor.putString("token", token)
+        editor.apply()
+    }
+
+    fun getToken() : String?{
+        return PrefreciasGlobal.getString("token", "")
+    }
+
    fun Logueado() : Boolean{
        return PrefreciasGlobal.getBoolean("Logueado", false)
    }
@@ -41,19 +57,31 @@ class Ayudante(private val context: Context)  {
         return PrefreciasGlobal.contains(llave)
     }
 
+    fun viewLogin(splash : SplashScreen, view : Activity ){
+        if(!this.Logueado()){
+            splash.setKeepOnScreenCondition{true}
+            this.showInfo("Usted aun no tiene una Sesión Activa, Por favor Inice Sesión.")
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent : Intent = Intent(context, LoginActivity::class.java)
+                context.startActivity(intent)
+                view.finish()
+            }, 2500)
+        }
+    }
+
     fun showSuccess(message : String) {
-        Toasty.success(context, message, Toast.LENGTH_SHORT).show()
+        Toasty.success(context, message, Toast.LENGTH_SHORT, true).show()
     }
 
     fun showError(message : String) {
-        Toasty.error(context, message, Toast.LENGTH_SHORT).show()
+        Toasty.error(context, message, Toast.LENGTH_SHORT, true).show()
     }
 
     fun showInfo(message : String) {
-        Toasty.info(context, message, Toast.LENGTH_SHORT).show()
+        Toasty.info(context, message, Toast.LENGTH_SHORT, true).show()
     }
 
     fun showWarning(message : String) {
-        Toasty.warning(context, message, Toast.LENGTH_SHORT).show()
+        Toasty.warning(context, message, Toast.LENGTH_SHORT,true).show()
     }
 }

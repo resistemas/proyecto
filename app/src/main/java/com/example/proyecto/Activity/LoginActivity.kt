@@ -17,10 +17,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.proyecto.Activity.RegistrationUtil
+import com.example.proyecto.Core.Ayudante
+import com.example.proyecto.ViewModel.Factory.LoginFactory
+import com.example.proyecto.ViewModel.LoginViewModel
+import com.example.proyecto.ViewModel.ProductosViewModel
 import org.w3c.dom.Text
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var Preferencias : Ayudante
+    private lateinit var viewModel : LoginViewModel
     private lateinit var btnRecuperarCuenta : TextView
     private lateinit var btnFacebookFire  : ImageView
     private lateinit var btnGoogleFire : ImageView
@@ -34,11 +41,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
-
-
-        txtUsuario = findViewById(R.id.txtUsuario)
-        txtPassword = findViewById(R.id.txtPassword)
-
+        Preferencias = Ayudante(this)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.LoginContainer)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -46,14 +49,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         initView()
+        initViewModel()
         btnActions()
-
-        findViewById<View>(R.id.btnIniciarSesion).setOnClickListener {
-            if (validateInputs()) {
-                // Proceed with login
-                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 
     private fun validateInputs(): Boolean {
@@ -87,14 +84,39 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun btnActions(){
-        btnIniciarSesion.setOnClickListener {  }
+        btnIniciarSesion.setOnClickListener { inicarSesion(txtUsuario.text.toString(), txtPassword.text.toString()) }
         btnRecuperarCuenta.setOnClickListener {  }
         btnFacebookFire.setOnClickListener {  }
         btnGoogleFire.setOnClickListener {  }
         btnRegistro.setOnClickListener { startActivity(Intent(this, RegistroActivity::class.java)) }
     }
 
-    private fun inicarSesion(){
+    private fun initViewModel(){
+        //factory
+        val factory = LoginFactory(Preferencias)
+        //viewModel
+        viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
+    }
 
+    private fun inicarSesion(email : String, password : String){
+
+        if (email.isEmpty()) {
+            Preferencias.showInfo("El Correo Eletronico no puede estar vacio")
+            txtUsuario.requestFocus()
+            return
+        } else if (password.isEmpty()) {
+            Preferencias.showInfo("El campo de contraseña no puede estar vacío")
+            txtPassword.requestFocus()
+            return
+        }
+
+        viewModel.statusAuth.observe(this){
+            if(it){
+                val intent : Intent = Intent(this, DashboardActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
+        viewModel.autenticacion(email, password)
     }
 }

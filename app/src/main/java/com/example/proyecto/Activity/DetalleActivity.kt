@@ -22,7 +22,7 @@ import com.example.proyecto.R
 import com.example.proyecto.ViewModel.ProductosViewModel
 import com.google.android.material.imageview.ShapeableImageView
 
-class DetalleActivity : AppCompatActivity() {
+class DetalleActivity : MainActivity() {
     private lateinit var viewModel : ProductosViewModel
 
     private lateinit var pgDetalle : ProgressBar
@@ -125,6 +125,11 @@ class DetalleActivity : AppCompatActivity() {
     private fun btnActions(){
         btnAtrasDetalle.setOnClickListener {
             startActivity(Intent(this, DashboardActivity::class.java))
+            finish()
+        }
+
+        btnFavoritoDetalle.setOnClickListener {
+            startActivity(Intent(this, FavoritoActivity::class.java))
             finish()
         }
     }
