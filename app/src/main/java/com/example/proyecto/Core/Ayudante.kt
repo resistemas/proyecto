@@ -6,9 +6,12 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.core.splashscreen.SplashScreen
+import com.example.proyecto.Activity.DashboardActivity
 import com.example.proyecto.Activity.LoginActivity
+import com.example.proyecto.Activity.PerfilActivity
 import com.example.proyecto.Model.Usuario
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -37,6 +40,7 @@ class Ayudante(private val context: Context)  {
     }
 
     fun getToken() : String?{
+        Variables.API_KEY = PrefreciasGlobal.getString("token","").toString()
         return PrefreciasGlobal.getString("token", "")
     }
 
@@ -53,6 +57,18 @@ class Ayudante(private val context: Context)  {
         }
     }
 
+    fun getIdUsuario() : Int? {
+        val typeToken = object : TypeToken<List<Usuario>>() {}
+        var usuario = usuarioLoqueado(typeToken)
+        if(usuario.size > 0){
+            return usuario.first().id
+        }else{
+            return 0
+        }
+
+
+    }
+
     fun introView(llave : String) : Boolean{
         return PrefreciasGlobal.contains(llave)
     }
@@ -63,10 +79,33 @@ class Ayudante(private val context: Context)  {
             this.showInfo("Usted aun no tiene una Sesión Activa, Por favor Inice Sesión.")
             Handler(Looper.getMainLooper()).postDelayed({
                 val intent : Intent = Intent(context, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 context.startActivity(intent)
                 view.finish()
             }, 2500)
         }
+    }
+
+    fun viewLoginProfile(splash : SplashScreen, view : Activity ){
+        if(this.Logueado()){
+            splash.setKeepOnScreenCondition{true}
+            val intent : Intent = Intent(context, PerfilActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            context.startActivity(intent)
+            view.finish()
+        }
+    }
+
+    fun viewDasboard(splash : SplashScreen, view : Activity ){
+        splash.setKeepOnScreenCondition{true}
+        this.showSuccess("Usted acaba de Cerrar Sesión.")
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent : Intent = Intent(context, DashboardActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            context.startActivity(intent)
+            view.finish()
+        }, 2500)
+
     }
 
     fun showSuccess(message : String) {

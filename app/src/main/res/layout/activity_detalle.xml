@@ -57,6 +57,19 @@
                     app:layout_constraintVertical_bias="0.16"
                     app:shapeAppearanceOverlay="@style/roundedImageView" />
 
+                <ImageView
+                    android:id="@+id/btnShopDetalle"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/btn_shop_general"
+                    android:padding="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.747"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/posterGrande"
+                    app:srcCompat="@drawable/shop" />
+
                 <TextView
                     android:id="@+id/textTituloDetalle"
                     android:layout_width="0dp"
@@ -104,11 +117,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/montserrat"
+                    android:lines="3"
+                    android:maxLines="3"
                     android:text="TextView"
                     android:textColor="@color/white"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +147,8 @@
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/posterGrande"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtDetalleParrafo" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -192,7 +209,9 @@
         android:id="@+id/reciclerRelacionadoDetalle"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="130dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

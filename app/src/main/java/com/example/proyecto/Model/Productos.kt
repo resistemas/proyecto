@@ -4,35 +4,35 @@ import com.google.gson.annotations.SerializedName
 
 data class Productos(
     @SerializedName("id")
-    var id : Int,
+    var id : Int? = null,
 
     @SerializedName("usuario_id")
-    var usuario_id : Int,
+    var usuarioId : Int? = null,
 
     @SerializedName("categoria_id")
-    var categoria_id : Int,
+    var categoriaId : Int? = null,
 
     @SerializedName("codigo")
-    var codigo : String,
+    var codigo : String? = null,
 
     @SerializedName("producto")
-    var producto : String,
+    var producto : String? = null,
 
     @SerializedName("descripcion")
-    var descripcion : String,
+    var descripcion : String? = null,
 
     @SerializedName("photo_video")
-    var photo_video : String,
+    var photo_video : String? = null,
 
     @SerializedName("precio")
-    var precio : String,
+    var precio : String? = null,
 
     @SerializedName("estado")
-    var estado : String,
+    var estado : String? = null,
 
     @SerializedName("vendedor")
-    var vendedor : Vendedor,
+    var vendedor : Vendedor? = Vendedor(),
 
     @SerializedName("categoria")
-    var categoria : Categoria,
+    var categoria : Categoria? = Categoria(),
 )

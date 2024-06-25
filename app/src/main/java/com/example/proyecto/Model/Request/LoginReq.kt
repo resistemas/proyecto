@@ -1,8 +1,8 @@
-package com.example.proyecto.Model
+package com.example.proyecto.Model.Request
 
 import com.google.gson.annotations.SerializedName
 
-data class Login(
+data class LoginReq(
     @SerializedName("email")
     var email : String? = null,
 

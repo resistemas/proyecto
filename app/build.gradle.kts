@@ -66,12 +66,20 @@ dependencies {
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+//    Okhttp3
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+
 //   Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
 //   KToasty
     implementation("com.github.GrenderG:Toasty:1.5.0")
+
+//    Dialog Fragment
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.fragment:fragment-ktx:1.3.6")
+    implementation("androidx.core:core-ktx:1.6.0")
 
 //   Test Library
     androidTestImplementation ("androidx.test.ext:junit:1.1.3")

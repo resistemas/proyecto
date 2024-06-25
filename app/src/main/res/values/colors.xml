@@ -3,7 +3,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#0098DA</color>
+    <color name="primary_40">#660098DA</color>
     <color name="secondary">#4DC8F4</color>
+    <color name="gris">#E3E4E5</color>
     <color name="main_background">#F2F2F2</color>
-    <color name="amarrillo_oro">#FFC107</color>
+    <color name="amarrillo_oro">#FFD200</color>
+    <color name="jade">#34E3AD</color>
+    <color name="rojo">#EA0E28</color>
+    <color name="rojo_40">#66EA0E28</color>
+    <color name="rojo_oscuro">#B80A1F</color>
 </resources>

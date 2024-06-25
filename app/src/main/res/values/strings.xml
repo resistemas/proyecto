@@ -15,6 +15,13 @@
     <string name="txtIngresarRedes">Tambien puede ingresar:</string>
     <string name="txtRegistrarseLogin">Sin una cuenta Registrate, <b>AQUI</b>.</string>
 
+    <!--    Texto Registro-->
+    <string name="txtRegistro">REGISTRO</string>
+    <string name="txtRegLogin">Ya tienes cuenta Inicia Sesión, <b>AQUI</b>.</string>
+    <string name="txtNombresReg">Nombres Apellidos</string>
+    <string name="txtPassworConfReg">Confirmar Contraseña</string>
+    <string name="btnRegistro">REGISTRARME</string>
+
     <!--    Texto Dashboard-->
     <string name="txtBuscar">Que es lo que buscas?</string>
     <string name="txtBuscarHitn">Buscar...</string>
@@ -24,4 +31,22 @@
     <!--    Texto Detalle Artesania-->
     <string name="txtDescripcion">Descripción</string>
     <string name="txtArtesano">Artesano</string>
+
+    <!--    Texto Favorito-->
+    <string name="txtFavoritoLista">Listado de Favoritos</string>
+
+    <!--    Texto Comprar-->
+    <string name="txtCompra">DATOS DE COMPRAS</string>
+    <string name="txtComCiudad">Ciudad</string>
+    <string name="txtComDireccion">Dirección</string>
+    <string name="txtComCantidad">Cantidad</string>
+    <string name="txtComTotal">Total</string>
+    <string name="txtCombutton">COMPRAR</string>
+
+    <!--    Texto Perfil-->
+    <string name="txtCodigoPerf"><b>CODIGO: </b></string>
+    <string name="txtNombresPerf"><b>NOMBRES APELLIDOS: </b></string>
+    <string name="txtCorreoPerf"><b>CORREO ELECTRONICO: </b></string>
+    <string name="txtRolPerf"><b>ROL: </b></string>
+    <string name="txtEstadoPerf"><b>ESTADO: </b></string>
 </resources>

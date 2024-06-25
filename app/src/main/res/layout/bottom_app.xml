@@ -10,13 +10,13 @@
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="75dp"
         android:layout_gravity="bottom"
         app:backgroundTint="@color/primary">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
@@ -26,6 +26,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:layout_weight="0.2"
+                android:paddingTop="10dp"
                 app:srcCompat="@drawable/home"
                 app:tint="@color/white" />
 
@@ -36,6 +37,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:layout_weight="0.2"
+                android:paddingTop="10dp"
                 app:srcCompat="@drawable/favorite"
                 app:tint="@color/white" />
 
@@ -45,6 +47,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0.2"
+                android:paddingTop="10dp"
                 android:visibility="invisible"
                 app:srcCompat="@drawable/shop"
                 app:tint="@color/white" />
@@ -56,6 +59,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:layout_weight="0.2"
+                android:paddingTop="10dp"
                 app:srcCompat="@drawable/shop"
                 app:tint="@color/white" />
 
@@ -66,6 +70,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:layout_weight="0.2"
+                android:paddingTop="10dp"
                 app:srcCompat="@drawable/user"
                 app:tint="@color/white" />
         </LinearLayout>

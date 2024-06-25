@@ -29,6 +29,6 @@ data class Usuario(
     var estado : String? = null,
 
     @SerializedName("roles")
-    var roles : Rol
+    var roles : Rol? = Rol()
 
 )

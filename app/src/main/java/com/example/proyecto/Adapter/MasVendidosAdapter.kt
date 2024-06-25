@@ -52,7 +52,7 @@ class MasVendidosAdapter(
         holder.clMasVendido.setOnClickListener {
             val intent = Intent(context, DetalleActivity::class.java)
             intent.putExtra("id", masVendido.id)
-            intent.putExtra("categoria", masVendido.categoria_id)
+            intent.putExtra("categoria", masVendido.categoriaId)
             holder.itemView.context.startActivity(intent)
 
 //            showOverview(masVendido.descripcion, masVendido.producto)

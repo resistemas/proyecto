@@ -42,8 +42,4 @@ class IntroActivity : AppCompatActivity() {
 
     }
 
-    private fun authVery(){
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        viewModel.vericarAuthRequest()
-    }
 }

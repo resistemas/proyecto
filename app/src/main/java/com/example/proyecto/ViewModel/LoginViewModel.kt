@@ -10,7 +10,7 @@ import com.example.proyecto.Core.Ayudante
 import com.example.proyecto.Core.Variables
 import com.example.proyecto.Model.Header.HeadVerificarAuth
 import com.example.proyecto.Model.Header.HeaderLogin
-import com.example.proyecto.Model.Login
+import com.example.proyecto.Model.Request.LoginReq
 import com.example.proyecto.Network.RetrofitCliente
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -22,8 +22,7 @@ import retrofit2.Response
 class LoginViewModel(private  val Preferencias : Ayudante) : ViewModel() {
     private val dispatcherIO: CoroutineDispatcher = Dispatchers.IO
     private val _statusAuth = MutableLiveData<Boolean>()
-    val statusAuth: LiveData<Boolean>
-        get() = _statusAuth
+    val statusAuth: LiveData<Boolean> get() = _statusAuth
     fun vericarAuthRequest(){
         viewModelScope.launch(dispatcherIO){
             val response = RetrofitCliente.webService.verficarAuth()
@@ -37,10 +36,15 @@ class LoginViewModel(private  val Preferencias : Ayudante) : ViewModel() {
                         if(res?.status == true){
                             Preferencias.setPrefLogeuado(true)
                             Preferencias.setPrefUsuario(res.data)
+                            _statusAuth.postValue(true)
                         }else{
                             Preferencias.setPrefLogeuado(false)
                             Preferencias.setPrefUsuario(listOf())
+                            _statusAuth.postValue(false)
                         }
+                    }else{
+                        Preferencias.setPrefLogeuado(false)
+                        _statusAuth.postValue(false)
                     }
                 }
 
@@ -53,7 +57,7 @@ class LoginViewModel(private  val Preferencias : Ayudante) : ViewModel() {
     }
 
     fun autenticacion(email : String, password : String){
-        val req = Login(email, password)
+        val req = LoginReq(email, password)
         viewModelScope.launch(dispatcherIO){
             val response = RetrofitCliente.webService.autenticacionAuth(req)
             response.enqueue(object : Callback<HeaderLogin>{
@@ -63,7 +67,6 @@ class LoginViewModel(private  val Preferencias : Ayudante) : ViewModel() {
                 ) {
                     val res = response.body()
                     if(response.isSuccessful){
-                        Log.d("IRAMUS", res.toString())
                         if(res?.status == true){
                             Preferencias.setPrefLogeuado(true)
                             Preferencias.setPrefUsuarioToken(res.token.toString())

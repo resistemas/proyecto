@@ -13,5 +13,5 @@
         </shape>
     </item>
 
-    <item android:drawable="@drawable/add" android:top="15dp" android:bottom="15dp" android:left="15dp" android:right="15dp"/>
+    <item android:drawable="@drawable/shop_item" android:top="10dp" android:bottom="10dp" android:left="10dp" android:right="10dp"/>
 </layer-list>

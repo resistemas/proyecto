@@ -19,5 +19,5 @@ data class MasVendidos(
     var total : String? = null,
 
     @SerializedName("producto")
-    var producto : Productos
+    var producto : Productos? = Productos()
 )

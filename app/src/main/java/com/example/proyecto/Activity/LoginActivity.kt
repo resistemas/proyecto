@@ -15,17 +15,21 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.proyecto.Activity.RegistrationUtil
 import com.example.proyecto.Core.Ayudante
+import com.example.proyecto.Core.Validaciones
 import com.example.proyecto.ViewModel.Factory.LoginFactory
 import com.example.proyecto.ViewModel.LoginViewModel
 import com.example.proyecto.ViewModel.ProductosViewModel
 import org.w3c.dom.Text
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var splash : SplashScreen
     private lateinit var Preferencias : Ayudante
     private lateinit var viewModel : LoginViewModel
     private lateinit var btnRecuperarCuenta : TextView
@@ -41,7 +45,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+        splash = installSplashScreen()
         Preferencias = Ayudante(this)
+        Preferencias.viewLoginProfile(splash, this)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.LoginContainer)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -51,25 +57,6 @@ class LoginActivity : AppCompatActivity() {
         initView()
         initViewModel()
         btnActions()
-    }
-
-    private fun validateInputs(): Boolean {
-        val usuario = txtUsuario.text.toString()
-        val password = txtPassword.text.toString()
-
-        if (!RegistrationUtil.validateRegistrationInput(usuario, password)) {
-            if (usuario.isEmpty()) {
-                txtUsuario.error = "El campo de usuario no puede estar vacío"
-            } else if (usuario in RegistrationUtil.existingUsers) {
-                txtUsuario.error = "El nombre de usuario ya está tomado"
-            } else if (password.isEmpty()) {
-                txtPassword.error = "El campo de contraseña no puede estar vacío"
-            }  else if (password.count { it.isDigit() } < 2) {
-                txtPassword.error = "La contraseña debe contener al menos 2 números"
-            }
-            return false
-        }
-        return true
     }
 
     private fun initView(){
@@ -99,14 +86,19 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun inicarSesion(email : String, password : String){
-
-        if (email.isEmpty()) {
-            Preferencias.showInfo("El Correo Eletronico no puede estar vacio")
-            txtUsuario.requestFocus()
-            return
-        } else if (password.isEmpty()) {
-            Preferencias.showInfo("El campo de contraseña no puede estar vacío")
-            txtPassword.requestFocus()
+        val valid = Validaciones().login(email, password)
+        if (valid != "Valido") {
+            if(valid.contains("contraseña")){
+                txtPassword.requestFocus()
+                Preferencias.showInfo(valid)
+            }else if(valid.contains("El Correo Electronico no es valido")){
+                txtPassword.setText("")
+                txtUsuario.requestFocus()
+                Preferencias.showError(valid)
+            }else{
+                txtUsuario.requestFocus()
+                Preferencias.showInfo(valid)
+            }
             return
         }
 

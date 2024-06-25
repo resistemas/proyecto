@@ -1,5 +1,6 @@
 package com.example.proyecto.ViewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -44,8 +45,9 @@ class ProductosViewModel : ViewModel() {
                             val productosMasVendidos = res.data
                             val listaProductos = mutableListOf<Productos>()
                             for (venta in productosMasVendidos) {
-                                val producto = venta.producto
-                                listaProductos.add(producto)
+                                venta.producto?.let { producto ->
+                                    listaProductos.add(producto)
+                                }
                             }
                             masVendidoLista.value = listaProductos
 
