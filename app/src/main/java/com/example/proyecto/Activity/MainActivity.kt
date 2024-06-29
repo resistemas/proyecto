@@ -18,6 +18,7 @@ import com.example.proyecto.Core.Ayudante
 import com.example.proyecto.R
 import com.example.proyecto.ViewModel.Factory.LoginFactory
 import com.example.proyecto.ViewModel.LoginViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 open class MainActivity : AppCompatActivity() {
     private lateinit var viewModelLogin : LoginViewModel
@@ -28,6 +29,7 @@ open class MainActivity : AppCompatActivity() {
     private lateinit var btnFavorito : ImageView
     private lateinit var btnShop : ImageView
     private lateinit var btnLogin : ImageView
+    private lateinit var btnCategorias : FloatingActionButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         splash = installSplashScreen()
@@ -48,6 +50,7 @@ open class MainActivity : AppCompatActivity() {
         btnFavorito = findViewById(R.id.btnFavorito)
         btnShop = findViewById(R.id.btnShop)
         btnLogin = findViewById(R.id.btnLogin)
+        btnCategorias = findViewById(R.id.btnCategoria)
     }
 
     private fun btnActions(){
@@ -67,6 +70,11 @@ open class MainActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
+        btnCategorias.setOnClickListener {
+            startActivity(Intent(this, CategoriasActivity::class.java))
             finish()
         }
     }

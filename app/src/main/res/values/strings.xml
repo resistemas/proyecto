@@ -43,6 +43,15 @@
     <string name="txtComTotal">Total</string>
     <string name="txtCombutton">COMPRAR</string>
 
+    <!--    Texto Shop-->
+    <string name="txtShop">Listado de Compras</string>
+
+    <!--    Texto Producto Buscado-->
+    <string name="txtFloatBtn">Listado de Categorias</string>
+
+    <!--    Texto Categorias-->
+    <string name="txtCategorias">Listado de Categorias</string>
+
     <!--    Texto Perfil-->
     <string name="txtCodigoPerf"><b>CODIGO: </b></string>
     <string name="txtNombresPerf"><b>NOMBRES APELLIDOS: </b></string>

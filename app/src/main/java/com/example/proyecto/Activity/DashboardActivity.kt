@@ -1,8 +1,11 @@
 package com.example.proyecto.Activity
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -27,6 +30,8 @@ class DashboardActivity : MainActivity() {
     private lateinit var rvRelacionados : RecyclerView
     private lateinit var pgRelacionados : ProgressBar
 
+    private lateinit var txtBuscar : EditText
+    private lateinit var btnBuscar : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +51,11 @@ class DashboardActivity : MainActivity() {
         pgRelacionados = findViewById(R.id.loadingRelacionados)
         pgRelacionados.visibility = View.VISIBLE
 
+        txtBuscar = findViewById(R.id.txtBuscarArtesania)
+        btnBuscar = findViewById(R.id.btnSearchProducto)
+
         initView()
+        initButtons()
     }
 
 
@@ -91,6 +100,17 @@ class DashboardActivity : MainActivity() {
         adapterRelacionados = NuevosAdpater(this, arrayListOf())
         rvRelacionados.adapter  = adapterRelacionados
 
+    }
+
+    private fun initButtons(){
+        btnBuscar.setOnClickListener {
+            if(txtBuscar.text.toString().trim() != ""){
+                val intent = Intent(this, ProductosActivity::class.java)
+                intent.putExtra("texto", txtBuscar.text.toString())
+                intent.putExtra("categoria", false)
+                startActivity(intent)
+            }
+        }
     }
 
 }

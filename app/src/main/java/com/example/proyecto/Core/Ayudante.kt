@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -12,6 +13,7 @@ import androidx.core.splashscreen.SplashScreen
 import com.example.proyecto.Activity.DashboardActivity
 import com.example.proyecto.Activity.LoginActivity
 import com.example.proyecto.Activity.PerfilActivity
+import com.example.proyecto.Activity.ShopActivity
 import com.example.proyecto.Model.Usuario
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -86,6 +88,18 @@ class Ayudante(private val context: Context)  {
         }
     }
 
+    fun viewShop(splash : SplashScreen, view : Activity ){
+        if(this.Logueado()){
+            splash.setKeepOnScreenCondition{true}
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent : Intent = Intent(context, ShopActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                context.startActivity(intent)
+                view.finish()
+            }, 2500)
+        }
+    }
+
     fun viewLoginProfile(splash : SplashScreen, view : Activity ){
         if(this.Logueado()){
             splash.setKeepOnScreenCondition{true}
@@ -122,5 +136,17 @@ class Ayudante(private val context: Context)  {
 
     fun showWarning(message : String) {
         Toasty.warning(context, message, Toast.LENGTH_SHORT,true).show()
+    }
+
+    //    API WHATSAPP
+    fun showWasa(message : String){
+        val sendIntent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse("http://api.whatsapp.com/send?phone=+936954810&text=$message")
+        }
+        if (sendIntent.resolveActivity(context.packageManager) != null) {
+            context.startActivity(sendIntent)
+        } else {
+            showWarning("Usted no tiene instalado la aplicacion requerida.")
+        }
     }
 }

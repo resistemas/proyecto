@@ -37,6 +37,26 @@ class Validaciones {
         return "Valido"
     }
 
+    fun compras(ciudad : String, direccion : String, cantidad : String, total : String): String{
+        if (ciudad.isEmpty()) {
+            return "Por Favor ingrese una Ciudad."
+        }
+
+        if (direccion.isEmpty()) {
+            return "Por Favor ingrese una Dirección."
+        }
+
+        if (cantidad.isEmpty()) {
+            return "Por Favor ingrese una Cantidad."
+        }
+
+        if (total.isEmpty()) {
+            return "Por Favor ingrese una Cantidad Mayor a 0."
+        }
+
+        return "Valido"
+    }
+
     fun tempEmail(correo : String) : Boolean{
         val tempEmail = listOf(
             "10minutemail.com",

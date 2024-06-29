@@ -27,6 +27,7 @@ class MasVendidosAdapter(
         val cvImagen = itemView.findViewById(R.id.imgDetalleImagen) as ImageView
         val tvTitulo = itemView.findViewById(R.id.txtTituloDetalleImagen) as TextView
         val tvScore = itemView.findViewById(R.id.txtScoreDetalleImagen) as TextView
+        val btnShop = itemView.findViewById(R.id.btnDetalleShop) as ImageView
 
     }
 
@@ -49,23 +50,13 @@ class MasVendidosAdapter(
         holder.tvTitulo.text = masVendido.producto
         holder.tvScore.text = "S/. ${masVendido.precio}"
 
-        holder.clMasVendido.setOnClickListener {
+        holder.btnShop.setOnClickListener {
             val intent = Intent(context, DetalleActivity::class.java)
             intent.putExtra("id", masVendido.id)
             intent.putExtra("categoria", masVendido.categoriaId)
             holder.itemView.context.startActivity(intent)
-
-//            showOverview(masVendido.descripcion, masVendido.producto)
         }
     }
-
     override fun getItemCount(): Int = masVendidosLista.size
 
-    fun showOverview(descripcion : String, producto : String){
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle(producto)
-        builder.setMessage(descripcion)
-        builder.show()
-
-    }
 }

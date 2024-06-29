@@ -26,8 +26,10 @@ import com.example.proyecto.Core.Ayudante
 import com.example.proyecto.Model.Request.FavoritoReq
 import com.example.proyecto.R
 import com.example.proyecto.ViewModel.Factory.FavoritoFactory
+import com.example.proyecto.ViewModel.Factory.VentaFactory
 import com.example.proyecto.ViewModel.FavoritoViewModel
 import com.example.proyecto.ViewModel.ProductosViewModel
+import com.example.proyecto.ViewModel.VentaViewModel
 import com.google.android.material.imageview.ShapeableImageView
 
 class DetalleActivity : MainActivity() {
@@ -35,6 +37,7 @@ class DetalleActivity : MainActivity() {
     private lateinit var splash : SplashScreen
     private lateinit var viewModel : ProductosViewModel
     private lateinit var viewModelFavorito : FavoritoViewModel
+    private lateinit var viewModelVenta : VentaViewModel
 
     private lateinit var pgDetalle : ProgressBar
 
@@ -148,7 +151,7 @@ class DetalleActivity : MainActivity() {
             finish()
         }
 
-        viewModel.productosLista.observe(this){
+        viewModel.productosLista.observe(this){ listadoProducto ->
             btnFavoritoDetalle.setOnClickListener {
                 if(!Preferencias.Logueado() || Preferencias.getIdUsuario() == 0){
                     Preferencias.viewLogin(splash, this)
@@ -157,37 +160,27 @@ class DetalleActivity : MainActivity() {
                     viewModelFavorito.storeFavorito(Preferencias.getIdUsuario().toString(),parametros?.getInt("id").toString(), "Activo")
                 }
             }
-        }
 
-
-        btnShopDetalle.setOnClickListener {
-            val parametros = intent.extras
-            val id = parametros?.getInt("id")
-            val categoria = parametros?.getInt("categoria")
-
-
-            if(!Preferencias.Logueado() || Preferencias.getIdUsuario() == 0){
-                Preferencias.viewLogin(splash, this)
-            }else {
-                ComprarModal(
-                    onSubmit = { ciudad, direccion, cantidad, total ->
-                        Preferencias.showInfo(ciudad.toString())
-                    }
-                ).show(supportFragmentManager, "ModalCompra")
-
-//                val intent: Intent = Intent(this, ShopActivity::class.java)
-//                intent.putExtra("id", id)
-//                intent.putExtra("categoria", categoria)
-//                startActivity(intent)
-//                finish()
+            btnShopDetalle.setOnClickListener {
+                if(!Preferencias.Logueado() || Preferencias.getIdUsuario() == 0){
+                    Preferencias.viewLogin(splash, this)
+                }else {
+                    ComprarModal( Preferencias, listadoProducto,
+                        onSubmit = { ciudad, direccion, cantidad, total ->
+                            viewModelVenta.storeVenta(listadoProducto.first().usuarioId.toString(),Preferencias.getIdUsuario().toString(), ciudad, direccion, listadoProducto.first().id.toString(), cantidad.toString(), total.toString())
+                            
+                        }
+                    ).show(supportFragmentManager, "ModalCompra")
+                }
             }
         }
-
-
     }
 
     private fun initViewModels(){
         val factory = FavoritoFactory(Preferencias)
         viewModelFavorito = ViewModelProvider(this, factory)[FavoritoViewModel::class.java]
+
+        val factoryVenta = VentaFactory(Preferencias, this, splash)
+        viewModelVenta = ViewModelProvider(this, factoryVenta)[VentaViewModel::class.java]
     }
 }

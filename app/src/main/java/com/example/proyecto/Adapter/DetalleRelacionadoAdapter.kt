@@ -22,6 +22,7 @@ class DetalleRelacionadoAdapter(var context: Context, var relacionadosLista : Li
         val cvImagen = itemView.findViewById(R.id.imgDetalleImagen) as ImageView
         val tvTitulo = itemView.findViewById(R.id.txtTituloDetalleImagen) as TextView
         val tvScore = itemView.findViewById(R.id.txtScoreDetalleImagen) as TextView
+        val btnShop = itemView.findViewById(R.id.btnDetalleShop) as ImageView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,18 +45,10 @@ class DetalleRelacionadoAdapter(var context: Context, var relacionadosLista : Li
         holder.tvTitulo.text = masVendido.producto
         holder.tvScore.text = "S/. ${masVendido.precio}"
 
-        holder.clMasVendido.setOnClickListener {
+        holder.btnShop.setOnClickListener {
             val intent = Intent(context, DetalleActivity::class.java)
             intent.putExtra("id", masVendido.id)
             holder.itemView.context.startActivity(intent)
-//            showOverview(masVendido.descripcion, masVendido.producto)
         }
-    }
-
-    fun showOverview(descripcion : String, producto : String){
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle(producto)
-        builder.setMessage(descripcion)
-        builder.show()
     }
 }

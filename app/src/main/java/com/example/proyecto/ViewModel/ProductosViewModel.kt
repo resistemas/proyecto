@@ -34,6 +34,54 @@ class ProductosViewModel : ViewModel() {
     val toastMessage: LiveData<String>
         get() = _toastMessage
 
+    fun buscarRequest(buscado : String){
+        viewModelScope.launch(dispatcherIO){
+            val response = RetrofitCliente.webService.buscarProducto(buscado)
+            response.enqueue(object : Callback<HeadProductos>{
+                override fun onResponse(call: Call<HeadProductos>, response: Response<HeadProductos>) {
+                    val res = response.body()
+                    if(response.isSuccessful){
+                        if(res?.status == true){
+                            productoLista.value = res.data
+                        }else{
+                            productoLista.value = listOf()
+                            _toastMessage.value = res?.message.toString()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<HeadProductos>, t: Throwable) {
+                    _toastMessage.value = t?.message.toString()
+                }
+
+            })
+        }
+    }
+
+    fun buscarCategoriaRequest(categoria : String){
+        viewModelScope.launch(dispatcherIO){
+            val response = RetrofitCliente.webService.buscarProductoCategoria(categoria)
+            response.enqueue(object : Callback<HeadProductos>{
+                override fun onResponse(call: Call<HeadProductos>, response: Response<HeadProductos>) {
+                    val res = response.body()
+                    if(response.isSuccessful){
+                        if(res?.status == true){
+                            productoLista.value = res.data
+                        }else{
+                            productoLista.value = listOf()
+                            _toastMessage.value = res?.message.toString()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<HeadProductos>, t: Throwable) {
+                    _toastMessage.value = t?.message.toString()
+                }
+
+            })
+        }
+    }
+
     fun masVendidosRequest(){
         viewModelScope.launch(dispatcherIO){
             val response = RetrofitCliente.webService.masVendidos()
